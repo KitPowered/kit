@@ -1,7 +1,6 @@
 package com.kitpowered.plugin.lifecycle
 
 import com.kitpowered.core.KitPlugin
-import com.kitpowered.plugin.KitMasterApplication
 import jakarta.annotation.PostConstruct
 import org.bukkit.plugin.PluginManager
 import org.springframework.beans.factory.annotation.Value
@@ -19,7 +18,7 @@ class LifecycleManager(
         println(test)
     }
 
-    fun onEnable(kitPlugin: KitPlugin<KitMasterApplication>) {
+    fun onEnable(kitPlugin: KitPlugin) {
 //        pluginManager.loadPlugin()
     }
 }

@@ -1,7 +1,6 @@
 pluginManagement {
     repositories {
         maven("https://kitpowered.nexus/")
-        mavenLocal()
     }
 }
 
@@ -10,7 +9,6 @@ dependencyResolutionManagement {
 
     repositories {
         maven("https://kitpowered.nexus/")
-        mavenLocal()
     }
 }
 
