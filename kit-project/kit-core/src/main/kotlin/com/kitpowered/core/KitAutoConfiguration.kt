@@ -35,7 +35,7 @@ class KitAutoConfiguration {
 
     @Suppress("UnstableApiUsage")
     @Bean
-    fun kitPlugin(applicationContext: ApplicationContext): KitPlugin<*> {
+    fun kitPlugin(applicationContext: ApplicationContext): KitPlugin {
         val applicationInstance = applicationContext
             .getBeansWithAnnotation(SpringBootApplication::class.java)
             .single()
@@ -45,7 +45,7 @@ class KitAutoConfiguration {
             throw IllegalStateException("SpringBootApplication class loader is not a PluginClassLoader")
         }
         val plugin = classLoader.plugin ?: throw IllegalStateException("PluginClassLoader does not have plugin")
-        if (plugin !is KitPlugin<*>) {
+        if (plugin !is KitPlugin) {
             throw IllegalStateException("Plugin is not KitPlugin")
         }
         return plugin

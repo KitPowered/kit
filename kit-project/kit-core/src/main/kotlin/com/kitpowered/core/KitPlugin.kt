@@ -15,13 +15,22 @@ import org.springframework.boot.logging.LoggingSystem
 import org.springframework.boot.logging.java.JavaLoggingSystem
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator
-import org.springframework.core.ResolvableType
 import org.springframework.core.annotation.AnnotationUtils
 import kotlin.coroutines.CoroutineContext
+import kotlin.reflect.KClass
 
-abstract class KitPlugin<A> : JavaPlugin(), PluginCoroutineScope,
-    BukkitConfigurationHolder<CoroutinesFileConfiguration> {
+abstract class KitPlugin(
+    private val applicationClass: Class<*>
+) : JavaPlugin(), PluginCoroutineScope, BukkitConfigurationHolder<CoroutinesFileConfiguration> {
     private var applicationContext: ConfigurableApplicationContext? = null
+
+    constructor(applicationClass: KClass<*>) : this(applicationClass.java)
+
+    init {
+        if (AnnotationUtils.findAnnotation(applicationClass, SpringBootApplication::class.java) == null) {
+            throw IllegalStateException("Application class is not annotated with @SpringBootApplication")
+        }
+    }
 
     protected open fun configureApplication(applicationBuilder: SpringApplicationBuilder): SpringApplicationBuilder {
         return applicationBuilder
@@ -40,7 +49,7 @@ abstract class KitPlugin<A> : JavaPlugin(), PluginCoroutineScope,
     private fun buildApplicationContext(): ConfigurableApplicationContext {
         return SpringApplicationBuilder()
             .resourceLoader(CascadingResourceLoader(this, server.pluginManager))
-            .sources(determineApplicationClass())
+            .sources(applicationClass)
             .web(WebApplicationType.NONE)
             .bannerMode(Banner.Mode.OFF)
             .logStartupInfo(false)
@@ -54,15 +63,6 @@ abstract class KitPlugin<A> : JavaPlugin(), PluginCoroutineScope,
             )
             .let { builder -> configureApplication(builder) }
             .run()
-    }
-
-    private fun determineApplicationClass(): Class<*> {
-        val applicationClass = ResolvableType.forClass(KitPlugin::class.java, this::class.java).resolveGeneric(0)
-            ?: throw IllegalStateException("Could not determine application class (value is null)")
-        if (AnnotationUtils.findAnnotation(applicationClass, SpringBootApplication::class.java) == null) {
-            throw IllegalStateException("Application class is not annotated with @SpringBootApplication")
-        }
-        return applicationClass
     }
 
     final override fun getConfig(): CoroutinesFileConfiguration {

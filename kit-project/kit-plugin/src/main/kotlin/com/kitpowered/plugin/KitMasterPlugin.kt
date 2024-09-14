@@ -6,7 +6,7 @@ import org.springframework.boot.Banner
 import org.springframework.boot.builder.SpringApplicationBuilder
 
 @Plugin
-class KitMasterPlugin : KitPlugin<KitMasterApplication>() {
+class KitMasterPlugin : KitPlugin(KitMasterApplication::class) {
 
     override fun configureApplication(applicationBuilder: SpringApplicationBuilder): SpringApplicationBuilder {
         return applicationBuilder
