@@ -1,6 +1,6 @@
 package com.kitpowered.core.task
 
-import com.kitpowered.core.condition.ConditionalOnFolia
+import com.kitpowered.core.util.condition.ConditionalOnFolia
 import org.bukkit.Bukkit
 import org.bukkit.plugin.Plugin
 import org.springframework.boot.autoconfigure.AutoConfiguration

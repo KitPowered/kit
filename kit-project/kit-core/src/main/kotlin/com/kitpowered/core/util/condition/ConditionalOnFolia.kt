@@ -1,4 +1,4 @@
-package com.kitpowered.core.condition
+package com.kitpowered.core.util.condition
 
 import org.springframework.context.annotation.Conditional
 
