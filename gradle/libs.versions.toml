@@ -1,0 +1,22 @@
+[versions]
+kotlin = "2.0.20"
+spring-boot = "3.3.3"
+kotlinx-coroutines = "1.8.1"
+paper = "1.21.1-R0.1-SNAPSHOT"
+mockbukkit = "3.120.5"
+pluginjar = "0.0.5-SNAPSHOT"
+
+[libraries]
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-reactor = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-reactor", version.ref = "kotlinx-coroutines" }
+
+spring-boot-starter = { group = "org.springframework.boot", name = "spring-boot-starter", version.ref = "spring-boot" }
+spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring-boot" }
+
+paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
+mockbukkit = { group = "com.github.seeseemelk", name = "MockBukkit-v1.21", version.ref = "mockbukkit" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+pluginjar = { id = "kr.junhyung.pluginjar", version.ref = "pluginjar" }
