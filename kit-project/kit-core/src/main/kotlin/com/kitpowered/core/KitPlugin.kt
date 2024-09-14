@@ -1,7 +1,9 @@
 package com.kitpowered.core
 
 import com.kitpowered.core.configuration.BukkitConfigurationContextInitializer
+import com.kitpowered.core.configuration.BukkitConfigurationHolder
 import com.kitpowered.core.coroutines.PluginCoroutineScope
+import com.kitpowered.core.coroutines.configuration.CoroutinesFileConfiguration
 import com.kitpowered.core.io.CascadingResourceLoader
 import com.kitpowered.core.service.BukkitServicesManagerContextInitializer
 import org.bukkit.plugin.java.JavaPlugin
@@ -17,7 +19,8 @@ import org.springframework.core.ResolvableType
 import org.springframework.core.annotation.AnnotationUtils
 import kotlin.coroutines.CoroutineContext
 
-abstract class KitPlugin<A> : JavaPlugin(), PluginCoroutineScope {
+abstract class KitPlugin<A> : JavaPlugin(), PluginCoroutineScope,
+    BukkitConfigurationHolder<CoroutinesFileConfiguration> {
     private var applicationContext: ConfigurableApplicationContext? = null
 
     protected open fun configureApplication(applicationBuilder: SpringApplicationBuilder): SpringApplicationBuilder {
@@ -60,6 +63,10 @@ abstract class KitPlugin<A> : JavaPlugin(), PluginCoroutineScope {
             throw IllegalStateException("Application class is not annotated with @SpringBootApplication")
         }
         return applicationClass
+    }
+
+    final override fun getConfig(): CoroutinesFileConfiguration {
+        return CoroutinesFileConfiguration(super.getConfig(), dataFolder.resolve("config.yml"))
     }
 
     final override val coroutineContext: CoroutineContext
