@@ -1,5 +1,3 @@
-com.kitpowered.core.KitAutoConfiguration
 com.kitpowered.core.task.BukkitTaskExecutorAutoConfiguration
-com.kitpowered.core.service.BukkitServicesManagerAutoConfiguration
-com.kitpowered.core.io.serializer.BukkitSerializationAutoConfiguration
-com.kitpowered.core.event.BukkitEventAutoConfiguration
+com.kitpowered.core.checker.CheckerAutoConfiguration
+com.kitpowered.core.KitPluginAutoConfiguration

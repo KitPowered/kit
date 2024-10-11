@@ -4,6 +4,7 @@ pluginManagement {
     }
 }
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
@@ -21,4 +22,4 @@ include(":kit-project:kit-core")
 include(":kit-project:kit-plugin")
 include(":kit-project:kit-test")
 
-include(":kit-project-tests:kit-integration-test")
+includeBuild("build-logic")

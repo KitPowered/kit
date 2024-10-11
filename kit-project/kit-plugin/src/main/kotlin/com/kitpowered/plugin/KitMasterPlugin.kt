@@ -1,16 +1,16 @@
 package com.kitpowered.plugin
 
 import com.kitpowered.core.KitPlugin
+import com.kitpowered.core.context.KitPluginConfigurer
 import kr.junhyung.pluginjar.annotation.Plugin
-import org.springframework.boot.Banner
-import org.springframework.boot.builder.SpringApplicationBuilder
 
 @Plugin
 class KitMasterPlugin : KitPlugin(KitMasterApplication::class) {
 
-    override fun configureApplication(applicationBuilder: SpringApplicationBuilder): SpringApplicationBuilder {
-        return applicationBuilder
-            .bannerMode(Banner.Mode.LOG)
-            .banner(KitBanner(this, file))
+    override fun configure(configurer: KitPluginConfigurer) {
+        configurer
+            .setLogStartupInfo(true)
+            .setBanner(KitBanner(this, this.file))
     }
+
 }
