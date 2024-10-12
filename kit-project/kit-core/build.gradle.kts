@@ -6,7 +6,6 @@ plugins {
 
 dependencies {
     compileOnlyApi(libs.paper.api)
-    compileOnly(libs.spigot)
 
     api(libs.spring.boot.starter)
     implementation(libs.spring.boot.starter.aop)
